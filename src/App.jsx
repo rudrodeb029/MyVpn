@@ -157,6 +157,8 @@ export default function App() {
   const [tempProfileName, setTempProfileName] = useState('JOHN D.');
   const [expandedCredentials, setExpandedCredentials] = useState({ 1100: true });
   const [visibleCredentialsPasswords, setVisibleCredentialsPasswords] = useState({});
+  const [selectedOrderVpn, setSelectedOrderVpn] = useState(null);
+  const [orderQuantity, setOrderQuantity] = useState(1);
 
   const vpnCatalog = [
     {
@@ -286,22 +288,31 @@ export default function App() {
     }));
   };
 
-  const handleOrderVpn = (vpn) => {
-    if (balance < vpn.price) {
+  const handleOpenOrderPopup = (vpn) => {
+    setSelectedOrderVpn(vpn);
+    setOrderQuantity(1);
+  };
+
+  const handleConfirmOrder = () => {
+    if (!selectedOrderVpn) return;
+    const vpn = selectedOrderVpn;
+    const totalCost = vpn.price * orderQuantity;
+
+    if (balance < totalCost) {
       showToast('Insufficient funds! Please add funds to your wallet.', 'error');
       return;
     }
 
-    setBalance(prev => parseFloat((prev - vpn.price).toFixed(2)));
+    setBalance(prev => parseFloat((prev - totalCost).toFixed(2)));
     
     const newOrderId = Math.floor(1200 + Math.random() * 800);
     const newOrder = {
       id: newOrderId,
       vpnId: vpn.id,
-      name: `${vpn.name} (${vpn.period === 'Month' ? '30 Day' : vpn.period})`,
+      name: `${vpn.name} (${vpn.period === 'Month' ? '30 Day' : vpn.period})${orderQuantity > 1 ? ` x${orderQuantity}` : ''}`,
       status: 'Pending Delivery',
       estTime: '15 mins',
-      price: vpn.price,
+      price: totalCost,
       createdAt: new Date().toISOString()
     };
 
@@ -311,13 +322,14 @@ export default function App() {
       { 
         id: Date.now(), 
         type: 'withdraw', 
-        amount: -vpn.price, 
+        amount: -totalCost, 
         desc: `VPN Order #${newOrderId}`, 
         icon: <Minus className="w-4 h-4 text-rose-400" /> 
       },
       ...prev
     ]);
 
+    setSelectedOrderVpn(null);
     showToast(`Order placed successfully! Order #${newOrderId}`, 'success');
   };
 
@@ -404,7 +416,7 @@ export default function App() {
     <div className="device-wrapper">
       {/* Notch */}
       <div className="device-island">
-        <span className="w-1.5 h-1.5 rounded-full bg-cyan-600 animate-pulse"></span>
+        <span className="rounded-full bg-cyan-600 animate-pulse" style={{ width: 6, height: 6 }}></span>
       </div>
 
       <div className="app-screen">
@@ -415,7 +427,7 @@ export default function App() {
             <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
               <path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.07 19.66 10.48 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/>
             </svg>
-            <span className="font-bold text-[10px] tracking-wider">5G</span>
+            <span className="font-bold tracking-wider" style={{ fontSize: '10px' }}>5G</span>
             <svg viewBox="0 0 24 24" className="w-4-5 h-4-5" fill="currentColor">
               <path d="M17 5H3a2 2 0 00-2 2v10a2 2 0 002 2h14a2 2 0 002-2V7a2 2 0 00-2-2zm-1 11H4V8h12v8zm5-7v6h1.5a.5.5 0 00.5-.5v-5a.5.5 0 00-.5-.5H21z"/>
             </svg>
@@ -424,23 +436,23 @@ export default function App() {
 
         {/* Global Toast Notification */}
         {toast && (
-          <div className={`absolute top-14 left-5 right-5 z-50 p-4 rounded-2xl backdrop-blur-xl border flex items-center gap-3 shadow-lg transform transition-all duration-300 animate-slide-down ${
+          <div className={`toast-container ${
             toast.type === 'success' 
-              ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-300' 
+              ? 'toast-success' 
               : toast.type === 'error'
-              ? 'bg-rose-500/10 border-rose-500/20 text-rose-300'
-              : 'bg-cyan-500/10 border-cyan-500/20 text-cyan-300'
+              ? 'toast-error'
+              : 'toast-info'
           }`}>
             {toast.type === 'success' && <CheckCircle className="w-5 h-5 shrink-0" />}
             {toast.type === 'error' && <AlertCircle className="w-5 h-5 shrink-0" />}
             {toast.type === 'info' && <Shield className="w-5 h-5 shrink-0" />}
-            <span className="text-xs font-semibold leading-snug">{toast.message}</span>
+            <span className="text-xs font-semibold" style={{ lineHeight: '1.4' }}>{toast.message}</span>
           </div>
         )}
 
         {/* ONBOARDING VIEW */}
         {screen === 'onboarding' && (
-          <div className="screen-wrapper justify-between py-6 px-5">
+          <div className="screen-wrapper justify-between h-full py-6 px-5">
             <div className="flex justify-between items-center mt-2">
               <button className="nav-btn hidden"><ArrowLeft className="w-5 h-5" /></button>
               <div className="font-title font-bold uppercase" style={{ fontSize: '11px', letterSpacing: '0.2em', color: 'rgba(34, 211, 238, 0.9)' }}>ONBOARDING</div>
@@ -676,7 +688,7 @@ export default function App() {
                     <Search className="input-icon" />
                   </div>
 
-                  <h3 className="font-title text-[13px] font-extrabold tracking-[0.18em] text-white/90 text-center mb-1">
+                  <h3 className="font-title font-extrabold text-center mb-1" style={{ fontSize: '13px', letterSpacing: '0.18em', color: 'rgba(255,255,255,0.9)' }}>
                     SELECT YOUR VPN
                   </h3>
 
@@ -715,8 +727,9 @@ export default function App() {
                           </div>
 
                           <button 
-                            onClick={() => handleOrderVpn(vpn)} 
-                            className="btn-primary w-full py-2-5 px-1 rounded-xl text-[11px] mt-4 shrink-0"
+                            onClick={() => handleOpenOrderPopup(vpn)} 
+                            className="btn-primary w-full rounded-xl mt-4 shrink-0"
+                            style={{ padding: '10px 4px', fontSize: '11px' }}
                           >
                             ORDER VPN
                           </button>
@@ -746,13 +759,13 @@ export default function App() {
                 <div className="flex flex-col gap-4 items-center">
                   
                   {/* Balance circular widget */}
-                  <div className="w-[195px] h-[195px] rounded-full border border-white/10 shadow-[0_0_50px_rgba(255,255,255,0.02)] flex flex-col justify-center items-center relative my-4 bg-gradient-to-b from-white/[0.04] to-transparent">
+                  <div className="balance-circle">
                     <div className="text-xs font-semibold tracking-wider text-slate-400 uppercase">Balance</div>
-                    <div className="font-title text-[32px] font-extrabold text-white mt-1">
+                    <div className="font-title font-extrabold text-white mt-1" style={{ fontSize: '32px' }}>
                       ${balance.toFixed(2)}
                     </div>
-                    <div className="absolute inset-2-5 rounded-full border border-cyan-dim"></div>
-                    <div className="absolute inset-5-5 rounded-full border border-purple-dim"></div>
+                    <div className="absolute inset-2-5 rounded-full border-cyan-dim"></div>
+                    <div className="absolute inset-5-5 rounded-full border-purple-dim"></div>
                   </div>
 
                   {/* Actions buttons */}
@@ -770,7 +783,7 @@ export default function App() {
 
                   {/* Transactions ledgers list */}
                   <div className="w-full mt-4">
-                    <h3 className="font-title text-[11px] font-bold tracking-[0.15em] text-slate-400 uppercase mb-3 px-1">
+                    <h3 className="font-title font-bold text-slate-400 uppercase mb-3 px-1" style={{ fontSize: '11px', letterSpacing: '0.15em' }}>
                       Recent Activity
                     </h3>
 
@@ -940,61 +953,81 @@ export default function App() {
 
                       {/* Expandable credentials drawer */}
                       {o.status === 'Completed' && o.credentials && (
-                        <div className="mt-1 flex flex-col gap-3" style={{ borderTop: '1px solid rgba(255, 255, 255, 0.05)', paddingTop: '14px' }}>
+                        <div className="credentials-drawer">
                           <button 
                             onClick={() => toggleExpandCredential(o.id)}
-                            className="flex justify-between items-center text-xs font-bold text-white/95 w-full hover:text-cyan-400 transition-colors border-0 bg-transparent cursor-pointer"
+                            className="credentials-toggle-btn"
                           >
-                            <span>CREDENTIALS</span>
-                            {expandedCredentials[o.id] ? <ChevronUp width="16" height="16" /> : <ChevronDown width="16" height="16" />}
+                            <div className="credentials-toggle-left">
+                              <div className="credentials-toggle-icon">
+                                <Shield style={{ width: 14, height: 14 }} />
+                              </div>
+                              <span>CREDENTIALS</span>
+                            </div>
+                            <div className={`credentials-chevron ${expandedCredentials[o.id] ? 'expanded' : ''}`}>
+                              <ChevronDown width="16" height="16" />
+                            </div>
                           </button>
 
-                          {expandedCredentials[o.id] && (
-                            <div className="credentials-box">
+                          <div className={`credentials-panel ${expandedCredentials[o.id] ? 'open' : ''}`}>
+                            <div className="credentials-panel-inner">
                               {/* Username */}
-                              <div className="credentials-row">
-                                <div className="text-slate-400 font-semibold">Username</div>
-                                <div className="credentials-value-container">
-                                  <span className="credentials-value">{o.credentials.username}</span>
+                              <div className="credential-field">
+                                <div className="credential-label">
+                                  <User style={{ width: 12, height: 12 }} />
+                                  <span>Username</span>
+                                </div>
+                                <div className="credential-value-row">
+                                  <span className="credential-value">{o.credentials.username}</span>
                                   <button 
                                     onClick={() => handleCopy(o.credentials.username, 'Username')}
-                                    className="credentials-copy-btn"
+                                    className="credential-action-btn"
+                                    title="Copy username"
                                   >
-                                    <Copy width="14" height="14" />
+                                    <Copy width="13" height="13" />
                                   </button>
                                 </div>
                               </div>
 
                               {/* Password */}
-                              <div className="credentials-row">
-                                <div className="text-slate-400 font-semibold">Password</div>
-                                <div className="credentials-value-container">
-                                  <span className="credentials-value">
+                              <div className="credential-field">
+                                <div className="credential-label">
+                                  <Lock style={{ width: 12, height: 12 }} />
+                                  <span>Password</span>
+                                </div>
+                                <div className="credential-value-row">
+                                  <span className="credential-value">
                                     {visibleCredentialsPasswords[o.id] ? o.credentials.password : '••••••••'}
                                   </span>
-                                  <button 
-                                    onClick={() => toggleCredentialPassword(o.id)}
-                                    className="credentials-copy-btn"
-                                  >
-                                    {visibleCredentialsPasswords[o.id] ? <EyeOff width="14" height="14" /> : <Eye width="14" height="14" />}
-                                  </button>
-                                  <button 
-                                    onClick={() => handleCopy(o.credentials.password, 'Password')}
-                                    className="credentials-copy-btn"
-                                  >
-                                    <Copy width="14" height="14" />
-                                  </button>
+                                  <div className="credential-actions">
+                                    <button 
+                                      onClick={() => toggleCredentialPassword(o.id)}
+                                      className="credential-action-btn"
+                                      title={visibleCredentialsPasswords[o.id] ? 'Hide password' : 'Show password'}
+                                    >
+                                      {visibleCredentialsPasswords[o.id] ? <EyeOff width="13" height="13" /> : <Eye width="13" height="13" />}
+                                    </button>
+                                    <button 
+                                      onClick={() => handleCopy(o.credentials.password, 'Password')}
+                                      className="credential-action-btn"
+                                      title="Copy password"
+                                    >
+                                      <Copy width="13" height="13" />
+                                    </button>
+                                  </div>
                                 </div>
                               </div>
 
                               {/* Expiry */}
-                              <div className="credentials-row mt-1" style={{ borderTop: '1px solid rgba(255, 255, 255, 0.05)', paddingTop: '8px' }}>
-                                <div className="text-slate-400 font-semibold">Expiry</div>
-                                <span className="credentials-value text-slate-300">{o.credentials.expiry}</span>
+                              <div className="credential-field credential-field-expiry">
+                                <div className="credential-label">
+                                  <CheckCircle style={{ width: 12, height: 12, color: '#34d399' }} />
+                                  <span>Expiry Date</span>
+                                </div>
+                                <span className="credential-value credential-expiry-value">{o.credentials.expiry}</span>
                               </div>
-
                             </div>
-                          )}
+                          </div>
                         </div>
                       )}
                     </div>
@@ -1116,6 +1149,80 @@ export default function App() {
                 </button>
               </div>
             )}
+          </div>
+        )}
+
+        {/* ORDER CONFIRMATION MODAL OVERLAY */}
+        {selectedOrderVpn && (
+          <div className="modal-overlay">
+            <div className="glass-card modal-card" style={{ padding: '24px 20px' }}>
+              
+              <div className="flex flex-col items-center">
+                <div className="shrink-0 rounded-2xl mb-3" style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', padding: '12px' }}>
+                  {selectedOrderVpn.id === 'surfshark' && <SurfsharkLogo />}
+                  {selectedOrderVpn.id === 'nordvpn' && <NordVPNLogo />}
+                  {selectedOrderVpn.id === 'customproxy' && <CustomProxyLogo />}
+                  {selectedOrderVpn.id === 'vpn' && <VpnLogo />}
+                </div>
+                <h3 className="font-title font-extrabold text-white" style={{ fontSize: '18px' }}>{selectedOrderVpn.name}</h3>
+                <p className="text-slate-400 mt-1 font-medium" style={{ fontSize: '12px' }}>
+                  {selectedOrderVpn.period === 'Month' ? '30 Day' : selectedOrderVpn.period} Subscription
+                </p>
+              </div>
+
+              <div className="w-full mt-4 flex flex-col gap-3">
+                <div className="flex justify-between items-center px-2">
+                  <span className="text-slate-400 font-semibold" style={{ fontSize: '12px' }}>Price:</span>
+                  <span className="text-white font-bold" style={{ fontSize: '14px' }}>${selectedOrderVpn.price.toFixed(2)}</span>
+                </div>
+                
+                <div className="flex justify-between items-center px-2">
+                  <span className="text-slate-400 font-semibold" style={{ fontSize: '12px' }}>Quantity:</span>
+                  <div className="flex items-center gap-3">
+                    <button 
+                      onClick={() => setOrderQuantity(Math.max(1, orderQuantity - 1))}
+                      className="w-8 h-8 rounded-lg flex items-center justify-center text-white"
+                      style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}
+                    >
+                      <Minus width="14" height="14" />
+                    </button>
+                    <span className="font-bold text-white w-4 text-center">{orderQuantity}</span>
+                    <button 
+                      onClick={() => setOrderQuantity(orderQuantity + 1)}
+                      className="w-8 h-8 rounded-lg flex items-center justify-center text-white"
+                      style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}
+                    >
+                      <Plus width="14" height="14" />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex justify-between items-center px-2 mt-2 pt-3" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+                  <span className="text-slate-300 font-bold" style={{ fontSize: '13px' }}>Total Cost:</span>
+                  <span className="text-cyan-400 font-extrabold" style={{ fontSize: '18px' }}>
+                    ${(selectedOrderVpn.price * orderQuantity).toFixed(2)}
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2.5 w-full mt-5">
+                <button 
+                  onClick={handleConfirmOrder} 
+                  className="w-full py-3.5 rounded-xl font-title text-xs font-bold text-white hover:opacity-95 transition-opacity"
+                  style={{ background: 'var(--purple-gradient)' }}
+                >
+                  CONFIRM ORDER
+                </button>
+                
+                <button 
+                  onClick={() => setSelectedOrderVpn(null)} 
+                  className="btn-secondary py-3.5 text-xs font-semibold"
+                >
+                  CANCEL
+                </button>
+              </div>
+
+            </div>
           </div>
         )}
 

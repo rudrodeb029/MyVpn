@@ -855,47 +855,180 @@ body {
   gap: 12px;
 }
 
-.credentials-box {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  background: rgba(0, 0, 0, 0.25);
-  border: var(--glass-border);
-  padding: 14px;
-  border-radius: 18px;
-  margin-top: 10px;
+/* ============================================
+   MODERN CREDENTIALS DROPDOWN (Professional)
+   ============================================ */
+
+/* Drawer container */
+.credentials-drawer {
+  margin-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 12px;
 }
 
-.credentials-row {
+/* Toggle button */
+.credentials-toggle-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(6, 182, 212, 0.06) 100%);
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #ffffff;
+  font-family: var(--font-title);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.credentials-toggle-btn:hover {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.14) 0%, rgba(6, 182, 212, 0.1) 100%);
+  border-color: rgba(139, 92, 246, 0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.12);
+}
+
+.credentials-toggle-btn:active {
+  transform: scale(0.98);
+}
+
+.credentials-toggle-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.credentials-toggle-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.15));
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a78bfa;
+}
+
+.credentials-chevron {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+}
+
+.credentials-chevron.expanded {
+  transform: rotate(180deg);
+  color: #a78bfa;
+}
+
+/* Collapsible panel */
+.credentials-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  opacity: 0;
+}
+
+.credentials-panel.open {
+  max-height: 320px;
+  opacity: 1;
+}
+
+.credentials-panel-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 4px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Individual credential field */
+.credential-field {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 12px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  transition: background 0.2s ease;
 }
 
-.credentials-value-container {
+.credential-field:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.credential-field-expiry {
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.credential-label {
   display: flex;
   align-items: center;
   gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.02em;
 }
 
-.credentials-value {
-  font-family: monospace;
+.credential-value-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.credential-value {
+  font-family: 'Inter', monospace;
   font-size: 11.5px;
-  font-weight: 500;
+  font-weight: 600;
   color: #ffffff;
+  letter-spacing: 0.02em;
 }
 
-.credentials-copy-btn {
-  padding: 6px;
-  border-radius: 6px;
+.credential-expiry-value {
+  color: #34d399;
+  font-weight: 700;
+}
+
+.credential-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.credential-action-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.05);
-  border: var(--glass-border);
-  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.4);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.credential-action-btn:hover {
+  background: rgba(139, 92, 246, 0.15);
+  border-color: rgba(139, 92, 246, 0.25);
+  color: #a78bfa;
+  transform: scale(1.08);
+}
+
+.credential-action-btn:active {
+  transform: scale(0.92);
 }
 
 /* User Profile Section */
