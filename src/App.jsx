@@ -158,7 +158,8 @@ export default function App() {
   const [expandedCredentials, setExpandedCredentials] = useState({ 1100: true });
   const [visibleCredentialsPasswords, setVisibleCredentialsPasswords] = useState({});
   const [selectedOrderVpn, setSelectedOrderVpn] = useState(null);
-  const [orderQuantity, setOrderQuantity] = useState(1);
+  const [selectedDuration, setSelectedDuration] = useState(1);
+  const [showDurationDropdown, setShowDurationDropdown] = useState(false);
 
   const vpnCatalog = [
     {
@@ -290,13 +291,21 @@ export default function App() {
 
   const handleOpenOrderPopup = (vpn) => {
     setSelectedOrderVpn(vpn);
-    setOrderQuantity(1);
+    setSelectedDuration(1);
+    setShowDurationDropdown(false);
   };
 
   const handleConfirmOrder = () => {
     if (!selectedOrderVpn) return;
     const vpn = selectedOrderVpn;
-    const totalCost = vpn.price * orderQuantity;
+    
+    let discount = 1;
+    if (selectedDuration === 3) discount = 0.9;
+    if (selectedDuration === 6) discount = 0.8;
+    
+    const subCost = vpn.price * selectedDuration * discount;
+    const platformFee = 2.00;
+    const totalCost = subCost + platformFee;
 
     if (balance < totalCost) {
       showToast('Insufficient funds! Please add funds to your wallet.', 'error');
@@ -309,7 +318,7 @@ export default function App() {
     const newOrder = {
       id: newOrderId,
       vpnId: vpn.id,
-      name: `${vpn.name} (${vpn.period === 'Month' ? '30 Day' : vpn.period})${orderQuantity > 1 ? ` x${orderQuantity}` : ''}`,
+      name: `${vpn.name} (${selectedDuration} ${selectedDuration > 1 ? 'Months' : 'Month'})`,
       status: 'Pending Delivery',
       estTime: '15 mins',
       price: totalCost,
@@ -1155,70 +1164,102 @@ export default function App() {
         {/* ORDER CONFIRMATION MODAL OVERLAY */}
         {selectedOrderVpn && (
           <div className="modal-overlay">
-            <div className="glass-card modal-card" style={{ padding: '24px 20px' }}>
+            <div className="glass-card modal-card" style={{ padding: '20px 18px', maxWidth: '300px', alignItems: 'stretch', textAlign: 'left', background: 'radial-gradient(circle at top left, rgba(76, 126, 138, 0.4) 0%, rgba(31, 55, 78, 0.9) 100%)', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7)' }}>
               
-              <div className="flex flex-col items-center">
-                <div className="shrink-0 rounded-2xl mb-3" style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', padding: '12px' }}>
+              <div className="text-center font-bold text-slate-300 mb-4" style={{ fontSize: '11px', letterSpacing: '0.3px' }}>
+                Order Confirmation: {selectedOrderVpn.name.replace('®', '')}
+              </div>
+
+              <div className="flex items-center gap-3 mb-5">
+                <div className="shrink-0 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#00838F', width: '38px', height: '38px', boxShadow: '0 4px 10px rgba(0,131,143,0.3)' }}>
                   {selectedOrderVpn.id === 'surfshark' && <SurfsharkLogo />}
                   {selectedOrderVpn.id === 'nordvpn' && <NordVPNLogo />}
                   {selectedOrderVpn.id === 'customproxy' && <CustomProxyLogo />}
                   {selectedOrderVpn.id === 'vpn' && <VpnLogo />}
                 </div>
-                <h3 className="font-title font-extrabold text-white" style={{ fontSize: '18px' }}>{selectedOrderVpn.name}</h3>
-                <p className="text-slate-400 mt-1 font-medium" style={{ fontSize: '12px' }}>
-                  {selectedOrderVpn.period === 'Month' ? '30 Day' : selectedOrderVpn.period} Subscription
-                </p>
+                <div>
+                  <h3 className="font-title font-bold text-white" style={{ fontSize: '15px' }}>{selectedOrderVpn.name}</h3>
+                  <p className="text-white mt-0.5" style={{ fontSize: '11px' }}>
+                    ${selectedOrderVpn.price.toFixed(2)} / {selectedOrderVpn.period}
+                  </p>
+                </div>
               </div>
 
-              <div className="w-full mt-4 flex flex-col gap-3">
-                <div className="flex justify-between items-center px-2">
-                  <span className="text-slate-400 font-semibold" style={{ fontSize: '12px' }}>Price:</span>
-                  <span className="text-white font-bold" style={{ fontSize: '14px' }}>${selectedOrderVpn.price.toFixed(2)}</span>
+              {/* Custom Dropdown */}
+              <div className="relative mb-5" style={{ zIndex: 10 }}>
+                <div 
+                  className="flex justify-between items-center px-3 py-2 rounded-t-xl cursor-pointer"
+                  style={{ backgroundColor: 'rgba(255, 255, 255, 0.08)', border: '1px solid rgba(255, 255, 255, 0.1)', borderBottom: 'none' }}
+                  onClick={() => setShowDurationDropdown(!showDurationDropdown)}
+                >
+                  <span className="text-white text-xs font-medium">Subscription Duration</span>
+                  <ChevronDown width="14" height="14" className="text-slate-400" />
                 </div>
                 
-                <div className="flex justify-between items-center px-2">
-                  <span className="text-slate-400 font-semibold" style={{ fontSize: '12px' }}>Quantity:</span>
-                  <div className="flex items-center gap-3">
-                    <button 
-                      onClick={() => setOrderQuantity(Math.max(1, orderQuantity - 1))}
-                      className="w-8 h-8 rounded-lg flex items-center justify-center text-white"
-                      style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}
-                    >
-                      <Minus width="14" height="14" />
-                    </button>
-                    <span className="font-bold text-white w-4 text-center">{orderQuantity}</span>
-                    <button 
-                      onClick={() => setOrderQuantity(orderQuantity + 1)}
-                      className="w-8 h-8 rounded-lg flex items-center justify-center text-white"
-                      style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}
-                    >
-                      <Plus width="14" height="14" />
-                    </button>
-                  </div>
-                </div>
-
-                <div className="flex justify-between items-center px-2 mt-2 pt-3" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-                  <span className="text-slate-300 font-bold" style={{ fontSize: '13px' }}>Total Cost:</span>
-                  <span className="text-cyan-400 font-extrabold" style={{ fontSize: '18px' }}>
-                    ${(selectedOrderVpn.price * orderQuantity).toFixed(2)}
-                  </span>
+                <div className="flex flex-col p-1 rounded-b-xl" style={{ backgroundColor: 'rgba(255, 255, 255, 0.08)', border: '1px solid rgba(255, 255, 255, 0.1)', borderTop: 'none' }}>
+                  <button 
+                    onClick={() => { setSelectedDuration(1); setShowDurationDropdown(false); }}
+                    className="text-left px-3 py-1.5 rounded-lg text-xs font-medium text-white hover:bg-white/10 transition-colors"
+                    style={{ backgroundColor: selectedDuration === 1 ? 'rgba(255,255,255,0.1)' : 'transparent' }}
+                  >
+                    1 Month ${selectedOrderVpn.price.toFixed(2)}
+                  </button>
+                  <button 
+                    onClick={() => { setSelectedDuration(3); setShowDurationDropdown(false); }}
+                    className="text-left px-3 py-1.5 rounded-lg text-xs font-medium text-white hover:bg-white/10 transition-colors"
+                    style={{ backgroundColor: selectedDuration === 3 ? 'rgba(255,255,255,0.1)' : 'transparent' }}
+                  >
+                    3 Months ${(selectedOrderVpn.price * 3 * 0.9).toFixed(2)}
+                  </button>
+                  <button 
+                    onClick={() => { setSelectedDuration(6); setShowDurationDropdown(false); }}
+                    className="text-left px-3 py-1.5 rounded-lg text-xs font-medium text-white hover:bg-white/10 transition-colors"
+                    style={{ backgroundColor: selectedDuration === 6 ? 'rgba(255,255,255,0.1)' : 'transparent' }}
+                  >
+                    6 Months ${(selectedOrderVpn.price * 6 * 0.8).toFixed(2)} - Save 20%
+                  </button>
                 </div>
               </div>
 
-              <div className="flex flex-col gap-2.5 w-full mt-5">
+              {/* Summary */}
+              <div className="flex flex-col gap-1.5 mb-5 pb-3" style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
+                <div className="flex justify-between text-white font-medium" style={{ fontSize: '11px' }}>
+                  <span>{selectedOrderVpn.name.replace('®', '')} Sub ({selectedDuration} Mo)</span>
+                  <span>${(selectedOrderVpn.price * selectedDuration * (selectedDuration === 6 ? 0.8 : selectedDuration === 3 ? 0.9 : 1)).toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-white font-medium" style={{ fontSize: '11px' }}>
+                  <span>Platform Fee</span>
+                  <span>$2.00</span>
+                </div>
+                <div className="flex justify-between text-white font-bold mt-1" style={{ fontSize: '13px' }}>
+                  <span>Total Due</span>
+                  <span>${((selectedOrderVpn.price * selectedDuration * (selectedDuration === 6 ? 0.8 : selectedDuration === 3 ? 0.9 : 1)) + 2.00).toFixed(2)}</span>
+                </div>
+              </div>
+
+              {/* Payment Details */}
+              <div className="flex flex-col gap-1 mb-6">
+                <span className="text-white font-bold" style={{ fontSize: '11px' }}>Payment Method Details:</span>
+                <div className="flex justify-between text-white font-medium mt-1" style={{ fontSize: '11px' }}>
+                  <span>Source: Wallet Balance</span>
+                  <span>${balance.toFixed(2)}</span>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-3 w-full">
                 <button 
                   onClick={handleConfirmOrder} 
-                  className="w-full py-3.5 rounded-xl font-title text-xs font-bold text-white hover:opacity-95 transition-opacity"
-                  style={{ background: 'var(--purple-gradient)' }}
+                  className="w-full py-3 rounded-[14px] font-title text-[13px] font-bold text-white hover:opacity-95 transition-opacity"
+                  style={{ background: 'linear-gradient(90deg, #9333ea 0%, #db2777 100%)', boxShadow: '0 4px 15px rgba(219, 39, 119, 0.3)' }}
                 >
-                  CONFIRM ORDER
+                  Finalize Order
                 </button>
                 
                 <button 
                   onClick={() => setSelectedOrderVpn(null)} 
-                  className="btn-secondary py-3.5 text-xs font-semibold"
+                  className="text-slate-300 text-xs font-medium hover:text-white transition-colors text-center bg-transparent border-0"
                 >
-                  CANCEL
+                  Back to Marketplace
                 </button>
               </div>
 
