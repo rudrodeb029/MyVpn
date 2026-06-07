@@ -14,7 +14,7 @@ const SurfsharkLogo = () => (
   </svg>
 );
 
-const NordVpnLogo = () => (
+const NordVPNLogo = () => (
   <svg viewBox="0 0 24 24" className="w-12 h-12" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M12 2L2 12H5V21H10V15H14V21H19V12H22L12 2Z" fill="#2979FF" stroke="#2979FF" strokeWidth="2" strokeLinejoin="round"/>
     <path d="M9 12L12 8L15 12" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
