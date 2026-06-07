@@ -928,21 +928,21 @@ body {
 }
 
 .profile-button-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
   width: 100%;
   margin-top: 8px;
 }
 
 .profile-btn {
   width: 100%;
-  padding: 16px 24px;
+  padding: 14px 10px;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.05);
   border: var(--glass-border);
   font-family: var(--font-title);
-  font-size: 13px;
+  font-size: 10.5px;
   font-weight: 700;
   color: #ffffff;
   cursor: pointer;
@@ -964,9 +964,10 @@ body {
 }
 
 .profile-btn .btn-icon {
-  width: 18px;
-  height: 18px;
-  margin-right: 16px;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  flex-shrink: 0;
 }
 
 /* Typography Standard Sizes */
