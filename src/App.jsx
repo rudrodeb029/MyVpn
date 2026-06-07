@@ -8,26 +8,25 @@ import {
 import profilePic from './assets/profile.png';
 
 // ----------------------------------------------------
-// PIXEL-PERFECT VECTOR LOGO COMPONENTS
+// PIXEL-PERFECT VECTOR LOGO COMPONENTS (EXPLICIT SIZES)
 // ----------------------------------------------------
 
 const SurfsharkLogo = () => (
-  <svg viewBox="0 0 100 100" className="w-11 h-11" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="44" height="44" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="surf-grad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#00E5FF" />
         <stop offset="100%" stopColor="#00838F" />
       </linearGradient>
     </defs>
-    <circle cx="50" cy="50" r="45" fill="rgba(0, 229, 255, 0.1)" stroke="rgba(0, 229, 255, 0.2)" strokeWidth="2" />
-    {/* shark fin wave shape */}
+    <circle cx="50" cy="50" r="45" fill="rgba(0, 229, 255, 0.08)" stroke="rgba(0, 229, 255, 0.18)" strokeWidth="2" />
     <path d="M50 20C40 38 24 48 24 62C24 75 35 80 50 80C65 80 76 75 76 62C76 48 60 38 50 20ZM48 35C53 45 66 54 66 63C66 69 59 73 50 73C41 73 34 69 34 63C34 54 47 45 48 35Z" fill="url(#surf-grad)" />
     <path d="M50 45C52 50 58 56 58 61C58 64 54 66 50 66C46 66 42 64 42 61C42 56 48 50 50 45Z" fill="#ffffff" opacity="0.8" />
   </svg>
 );
 
 const NordVPNLogo = () => (
-  <svg viewBox="0 0 100 100" className="w-11 h-11" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="44" height="44" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="nord-grad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#2979FF" />
@@ -35,21 +34,20 @@ const NordVPNLogo = () => (
       </linearGradient>
     </defs>
     <rect x="5" y="5" width="90" height="90" rx="28" fill="url(#nord-grad)" />
-    {/* Twin peak mountains */}
     <path d="M22 75L44 40L55 54L68 32L78 75H22Z" fill="#ffffff" />
     <path d="M44 40L50 48L55 54" stroke="rgba(0,0,0,0.15)" strokeWidth="3" strokeLinecap="round" />
   </svg>
 );
 
 const CustomProxyLogo = () => (
-  <svg viewBox="0 0 100 100" className="w-11 h-11" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="44" height="44" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="proxy-grad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#00E5FF" />
         <stop offset="100%" stopColor="#2979FF" />
       </linearGradient>
     </defs>
-    <circle cx="50" cy="50" r="45" fill="rgba(41, 121, 255, 0.1)" stroke="url(#proxy-grad)" strokeWidth="4" />
+    <circle cx="50" cy="50" r="45" fill="rgba(41, 121, 255, 0.08)" stroke="url(#proxy-grad)" strokeWidth="4" />
     <circle cx="50" cy="50" r="24" stroke="url(#proxy-grad)" strokeWidth="3" strokeDasharray="4 2" />
     <circle cx="50" cy="50" r="10" fill="#2979FF" />
     <circle cx="50" cy="18" r="6" fill="#00E5FF" />
@@ -60,7 +58,7 @@ const CustomProxyLogo = () => (
 );
 
 const VpnLogo = () => (
-  <svg viewBox="0 0 100 100" className="w-11 h-11" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="44" height="44" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="vpn-grad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#1e3c72" />
@@ -73,8 +71,8 @@ const VpnLogo = () => (
 );
 
 const GlobeShieldLogo = ({ size = 160 }) => (
-  <div className="relative flex items-center justify-center animate-fade-in" style={{ width: size, height: size }}>
-    {/* Global grid background */}
+  <div className="relative flex items-center justify-center animate-slide-in" style={{ width: size, height: size }}>
+    {/* Global lines */}
     <div className="absolute inset-0 rounded-full border border-cyan-500/10">
       <svg className="w-full h-full opacity-25" viewBox="0 0 100 100">
         <circle cx="50" cy="50" r="45" fill="none" stroke="#00E5FF" strokeWidth="0.8"/>
@@ -84,7 +82,7 @@ const GlobeShieldLogo = ({ size = 160 }) => (
         <line x1="5" y1="50" x2="95" y2="50" stroke="#00E5FF" strokeWidth="0.6"/>
       </svg>
     </div>
-    {/* Shield container */}
+    {/* Shield */}
     <div className="absolute w-[80%] h-[80%] rounded-full bg-cyan-950/20 backdrop-blur-xl border border-cyan-500/25 shadow-[0_0_35px_rgba(0,229,255,0.2)] flex flex-col items-center justify-center">
       <svg viewBox="0 0 100 100" className="w-[52%] h-[52%] drop-shadow-[0_0_10px_rgba(0,229,255,0.5)]" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M50 12L15 25V55C15 75 30 90 50 94C70 90 85 75 85 55V25L50 12Z" fill="rgba(0, 229, 255, 0.1)" stroke="#00E5FF" strokeWidth="4.5" />
@@ -97,11 +95,11 @@ const GlobeShieldLogo = ({ size = 160 }) => (
 );
 
 // ----------------------------------------------------
-// CRITICAL VECTOR FLAG COMPONENTS
+// PIXEL-PERFECT FLAG COMPONENTS
 // ----------------------------------------------------
 
 const UKFlag = () => (
-  <svg viewBox="0 0 60 40" className="w-[26px] h-[17px] rounded-[3px] shadow-sm shrink-0 border border-white/10" xmlns="http://www.w3.org/2000/svg">
+  <svg width="26" height="17" viewBox="0 0 60 40" className="rounded-sm shadow-sm shrink-0 border border-white/10" xmlns="http://www.w3.org/2000/svg">
     <rect width="60" height="40" fill="#012169"/>
     <path d="M0 0L60 40M60 0L0 40" stroke="#fff" strokeWidth="6"/>
     <path d="M0 0L60 40M60 0L0 40" stroke="#C8102E" strokeWidth="4"/>
@@ -111,7 +109,7 @@ const UKFlag = () => (
 );
 
 const RomaniaFlag = () => (
-  <svg viewBox="0 0 3 2" className="w-[26px] h-[17px] rounded-[3px] shadow-sm shrink-0 border border-white/10" xmlns="http://www.w3.org/2000/svg">
+  <svg width="26" height="17" viewBox="0 0 3 2" className="rounded-sm shadow-sm shrink-0 border border-white/10" xmlns="http://www.w3.org/2000/svg">
     <rect width="1" height="2" fill="#002B7F"/>
     <rect x="1" width="1" height="2" fill="#FCD116"/>
     <rect x="2" width="1" height="2" fill="#CE1126"/>
@@ -119,7 +117,7 @@ const RomaniaFlag = () => (
 );
 
 const NetherlandsFlag = () => (
-  <svg viewBox="0 0 3 2" className="w-[26px] h-[17px] rounded-[3px] shadow-sm shrink-0 border border-white/10" xmlns="http://www.w3.org/2000/svg">
+  <svg width="26" height="17" viewBox="0 0 3 2" className="rounded-sm shadow-sm shrink-0 border border-white/10" xmlns="http://www.w3.org/2000/svg">
     <rect width="3" height="2" fill="#AE1C28"/>
     <rect y="0.67" width="3" height="0.67" fill="#FFF"/>
     <rect y="1.33" width="3" height="0.67" fill="#21468B"/>
@@ -127,22 +125,18 @@ const NetherlandsFlag = () => (
 );
 
 const PolandFlag = () => (
-  <svg viewBox="0 0 3 2" className="w-[26px] h-[17px] rounded-[3px] shadow-sm shrink-0 border border-white/10" xmlns="http://www.w3.org/2000/svg">
+  <svg width="26" height="17" viewBox="0 0 3 2" className="rounded-sm shadow-sm shrink-0 border border-white/10" xmlns="http://www.w3.org/2000/svg">
     <rect width="3" height="1" fill="#FFF"/>
     <rect y="1" width="3" height="1" fill="#DC143C"/>
   </svg>
 );
 
-// ----------------------------------------------------
-// MAIN APP COMPONENT
-// ----------------------------------------------------
-
 export default function App() {
-  // Navigation states
-  const [screen, setScreen] = useState('onboarding'); // onboarding, signin, signup, app
-  const [activeTab, setActiveTab] = useState('home'); // home, wallet, addfunds, history, profile
+  // Navigation
+  const [screen, setScreen] = useState('onboarding');
+  const [activeTab, setActiveTab] = useState('home');
 
-  // Form states
+  // Auth states
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginUsername, setLoginUsername] = useState('john.d_nord99');
   const [loginEmail, setLoginEmail] = useState('john.d_nord99@email.com');
@@ -153,26 +147,17 @@ export default function App() {
   const [showPassword, setShowPassword] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
 
-  // App Features states
+  // App features states
   const [balance, setBalance] = useState(120.50);
   const [searchQuery, setSearchQuery] = useState('');
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
-  
-  // Interactive notification states
   const [toast, setToast] = useState(null);
-  
-  // Profile settings states
   const [profileName, setProfileName] = useState('JOHN D.');
   const [showProfileEdit, setShowProfileEdit] = useState(false);
   const [tempProfileName, setTempProfileName] = useState('JOHN D.');
-
-  // Collapsed states for credentials in order history
   const [expandedCredentials, setExpandedCredentials] = useState({ 1100: true });
-
-  // Password visibility for order credentials
   const [visibleCredentialsPasswords, setVisibleCredentialsPasswords] = useState({});
 
-  // Catalog items
   const vpnCatalog = [
     {
       id: 'surfshark',
@@ -212,7 +197,6 @@ export default function App() {
     }
   ];
 
-  // Orders states
   const [orders, setOrders] = useState([
     {
       id: 1234,
@@ -238,14 +222,12 @@ export default function App() {
     }
   ]);
 
-  // Wallet transactions ledger
   const [transactions, setTransactions] = useState([
     { id: 1, type: 'deposit', amount: 50.00, desc: 'Deposit', icon: <Plus className="w-4 h-4 text-emerald-400" /> },
     { id: 2, type: 'withdraw', amount: -25.00, desc: 'VPN Order #1234', icon: <Minus className="w-4 h-4 text-rose-400" /> },
     { id: 3, type: 'deposit', amount: 10.00, desc: 'Reward', icon: <Gift className="w-4 h-4 text-purple-400" /> }
   ]);
 
-  // Toast Auto-Dismissal
   useEffect(() => {
     if (toast) {
       const timer = setTimeout(() => {
@@ -255,7 +237,6 @@ export default function App() {
     }
   }, [toast]);
 
-  // Background simulation of order completion
   useEffect(() => {
     const pendingOrders = orders.filter(o => o.status === 'Pending Delivery');
     if (pendingOrders.length > 0) {
@@ -326,7 +307,6 @@ export default function App() {
 
     setOrders(prev => [newOrder, ...prev]);
     
-    // Add transaction ledger entry
     setTransactions(prev => [
       { 
         id: Date.now(), 
@@ -436,13 +416,13 @@ export default function App() {
               <path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.07 19.66 10.48 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/>
             </svg>
             <span className="font-bold text-[10px] tracking-wider">5G</span>
-            <svg viewBox="0 0 24 24" className="w-4.5 h-4.5" fill="currentColor">
+            <svg viewBox="0 0 24 24" className="w-4-5 h-4-5" fill="currentColor">
               <path d="M17 5H3a2 2 0 00-2 2v10a2 2 0 002 2h14a2 2 0 002-2V7a2 2 0 00-2-2zm-1 11H4V8h12v8zm5-7v6h1.5a.5.5 0 00.5-.5v-5a.5.5 0 00-.5-.5H21z"/>
             </svg>
           </div>
         </div>
 
-        {/* Dynamic Alert Banner */}
+        {/* Global Toast Notification */}
         {toast && (
           <div className={`absolute top-14 left-5 right-5 z-50 p-4 rounded-2xl backdrop-blur-xl border flex items-center gap-3 shadow-lg transform transition-all duration-300 animate-slide-down ${
             toast.type === 'success' 
@@ -503,7 +483,7 @@ export default function App() {
               <div className="flex flex-col items-center mb-8">
                 <GlobeShieldLogo size={90} />
                 <h2 className="font-title text-2xl font-bold mt-4 text-white">Welcome Back</h2>
-                <p className="text-xs text-slate-400 mt-1.5 text-center px-6 leading-relaxed font-medium">
+                <p className="text-xs text-slate-400 mt-1-5 text-center px-6 leading-relaxed font-medium">
                   Sign in to access your secure marketplace & wallet.
                 </p>
               </div>
@@ -593,7 +573,7 @@ export default function App() {
               <div className="flex flex-col items-center mb-8">
                 <GlobeShieldLogo size={90} />
                 <h2 className="font-title text-2xl font-bold mt-4 text-white">Create Your Account</h2>
-                <p className="text-xs text-slate-400 mt-1.5 text-center px-6 leading-relaxed font-medium">
+                <p className="text-xs text-slate-400 mt-1-5 text-center px-6 leading-relaxed font-medium">
                   Join the premium VPN marketplace.
                 </p>
               </div>
@@ -652,10 +632,10 @@ export default function App() {
           </div>
         )}
 
-        {/* MAIN TABS ROOT */}
+        {/* MAIN APP VIEWS */}
         {screen === 'app' && (
           <div className="screen-wrapper h-full flex flex-col justify-between">
-            {/* Header navbar */}
+            {/* Nav Header */}
             <div className="nav-header">
               {activeTab === 'addfunds' ? (
                 <button onClick={() => navigateTo('wallet')} className="nav-btn">
@@ -678,13 +658,13 @@ export default function App() {
               <button className="nav-btn"><span className="text-xs font-bold">•••</span></button>
             </div>
 
-            {/* Scrollable Layout Content */}
+            {/* Scrollable Content */}
             <div className="app-content">
               
               {/* TAB 1: MARKETPLACE */}
               {activeTab === 'home' && (
                 <div className="flex flex-col gap-4">
-                  {/* Search box */}
+                  {/* Search */}
                   <div className="input-group mb-2 mt-1">
                     <input 
                       type="text" 
@@ -700,50 +680,43 @@ export default function App() {
                     SELECT YOUR VPN
                   </h3>
 
-                  {/* Grid of cards */}
-                  <div className="grid grid-cols-2 gap-4">
+                  {/* Two-Column Responsive Grid */}
+                  <div className="vpn-grid">
                     {filteredCatalog.map((vpn, index) => {
-                      // Details rendering inside for the top two cards, and below for the bottom two
                       const isTopCard = index < 2;
 
                       return (
-                        <div key={vpn.id} className="glass-card flex flex-col justify-between items-center p-5 text-center min-h-[220px] mb-0 relative group hover:scale-[1.02] transition-transform duration-300">
-                          <div className="mb-2 shrink-0">{vpn.logo}</div>
+                        <div key={vpn.id} className="vpn-card">
+                          <div className="vpn-logo-container">{vpn.logo}</div>
                           
-                          <div className="flex-1 flex flex-col justify-center">
-                            <h4 className="font-title text-[15px] font-bold text-white tracking-wide">{vpn.name}</h4>
+                          <div className="vpn-details">
+                            <h4 className="vpn-title">{vpn.name}</h4>
                             
                             {/* Subtitle / Period */}
                             {vpn.id === 'customproxy' || vpn.id === 'vpn' ? (
-                              <div className="text-[11px] font-medium text-slate-400 mt-1">
-                                {vpn.period}
-                              </div>
+                              <div className="vpn-subtitle-period">{vpn.period}</div>
                             ) : null}
 
                             {/* Price */}
-                            <div className="text-[14px] font-bold text-slate-200 mt-0.5">
+                            <div className="vpn-price">
                               ${vpn.price.toFixed(2)}
-                              {vpn.id === 'surfshark' || vpn.id === 'nordvpn' ? (
-                                <span className="text-[10px] text-slate-400 font-normal"> / {vpn.period === 'Month' ? 'Month' : vpn.period}</span>
-                              ) : null}
+                              {(vpn.id === 'surfshark' || vpn.id === 'nordvpn') && (
+                                <span className="period-text"> / {vpn.period === 'Month' ? 'Month' : vpn.period}</span>
+                              )}
                             </div>
                             
-                            {/* Inner Info Row for Top Cards */}
+                            {/* Inner Info for Top Cards */}
                             {isTopCard && (
-                              <div className="mt-3">
-                                <div className="text-[8px] tracking-widest text-slate-400 font-bold uppercase">
-                                  EST. DELIVERY: {vpn.delivery}
-                                </div>
-                                <div className="text-[9px] font-bold text-emerald-400 mt-0.5">
-                                  STATUS: {vpn.status}
-                                </div>
+                              <div className="vpn-details mt-2">
+                                <div className="vpn-delivery-tag">EST. DELIVERY: {vpn.delivery}</div>
+                                <div className="vpn-status-tag">STATUS: {vpn.status}</div>
                               </div>
                             )}
                           </div>
 
                           <button 
                             onClick={() => handleOrderVpn(vpn)} 
-                            className="btn-primary w-full py-2.5 px-1 rounded-xl text-[11px] font-bold mt-4 shrink-0 shadow-sm"
+                            className="btn-primary w-full py-2-5 px-1 rounded-xl text-[11px] mt-4 shrink-0"
                           >
                             ORDER VPN
                           </button>
@@ -752,7 +725,7 @@ export default function App() {
                     })}
                   </div>
 
-                  {/* Asymmetrical Bottom Text Line for Bottom Cards */}
+                  {/* Marketplace Footer Status */}
                   {searchQuery === '' && (
                     <div className="marketplace-footer-text">
                       <span>EST. DELIVERY: <span className="highlight">10-20 MINS</span></span>
@@ -770,53 +743,50 @@ export default function App() {
 
               {/* TAB 2: WALLET */}
               {activeTab === 'wallet' && (
-                <div className="flex flex-col gap-4 items-center animate-fade-in">
+                <div className="flex flex-col gap-4 items-center">
                   
-                  {/* Balance Circle Widget */}
-                  <div className="w-[195px] h-[195px] rounded-full border border-white/10 shadow-[0_0_50px_rgba(255,255,255,0.02),_inset_0_0_20px_rgba(255,255,255,0.02)] flex flex-col justify-center items-center relative my-4 bg-gradient-to-b from-white/[0.04] to-transparent">
+                  {/* Balance circular widget */}
+                  <div className="w-[195px] h-[195px] rounded-full border border-white/10 shadow-[0_0_50px_rgba(255,255,255,0.02)] flex flex-col justify-center items-center relative my-4 bg-gradient-to-b from-white/[0.04] to-transparent">
                     <div className="text-xs font-semibold tracking-wider text-slate-400 uppercase">Balance</div>
                     <div className="font-title text-[32px] font-extrabold text-white mt-1">
                       ${balance.toFixed(2)}
                     </div>
-                    {/* Concentric rings */}
-                    <div className="absolute inset-2.5 rounded-full border border-cyan-500/[0.04]"></div>
-                    <div className="absolute inset-5.5 rounded-full border border-purple-500/[0.04]"></div>
+                    <div className="absolute inset-2-5 rounded-full border border-cyan-dim"></div>
+                    <div className="absolute inset-5-5 rounded-full border border-purple-dim"></div>
                   </div>
 
-                  {/* Buttons Grid */}
-                  <div className="grid grid-cols-2 gap-4 w-full px-1 mb-2">
-                    <button onClick={() => navigateTo('addfunds')} className="btn-primary py-3.5 text-xs font-bold tracking-wider">
+                  {/* Actions buttons */}
+                  <div className="wallet-actions-grid px-1 mb-2">
+                    <button onClick={() => navigateTo('addfunds')} className="btn-primary py-3-5 text-xs font-bold tracking-wider">
                       ADD FUNDS
                     </button>
                     <button 
                       onClick={() => showToast('Withdrawals are temporarily locked for security.', 'info')} 
-                      className="btn-secondary py-3.5 text-xs font-semibold tracking-wider"
+                      className="btn-secondary py-3-5 text-xs font-semibold tracking-wider"
                     >
                       WITHDRAW
                     </button>
                   </div>
 
-                  {/* Recent Activity */}
+                  {/* Transactions ledgers list */}
                   <div className="w-full mt-4">
                     <h3 className="font-title text-[11px] font-bold tracking-[0.15em] text-slate-400 uppercase mb-3 px-1">
                       Recent Activity
                     </h3>
 
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col">
                       {transactions.map((t) => (
-                        <div key={t.id} className="glass-card flex items-center justify-between p-4 mb-0 rounded-2xl border border-white/5">
-                          <div className="flex items-center gap-3.5">
-                            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
-                              {t.icon}
-                            </div>
-                            <div className="flex flex-col justify-center">
-                              <span className="text-xs font-bold text-white">{t.desc}</span>
-                              <span className="text-[10px] text-slate-400 font-semibold uppercase mt-0.5">{t.type}</span>
+                        <div key={t.id} className="transaction-item">
+                          <div className="transaction-info">
+                            <div className="transaction-icon">{t.icon}</div>
+                            <div className="transaction-texts">
+                              <span className="transaction-title">{t.desc}</span>
+                              <span className="transaction-desc">{t.type}</span>
                             </div>
                           </div>
                           
-                          <div className="text-right">
-                            <span className={`text-xs font-bold ${t.type === 'deposit' ? 'text-emerald-400' : 'text-slate-200'}`}>
+                          <div className="transaction-amount">
+                            <span className={t.type === 'deposit' ? 'text-emerald-400' : 'text-slate-200'}>
                               {t.type === 'deposit' ? '+' : ''}${Math.abs(t.amount).toFixed(2)}
                             </span>
                           </div>
@@ -830,13 +800,13 @@ export default function App() {
 
               {/* TAB 2.5: ADD FUNDS */}
               {activeTab === 'addfunds' && (
-                <div className="flex flex-col gap-4 animate-fade-in">
+                <div className="flex flex-col gap-4">
                   
-                  {/* Crypto Wallet Card */}
+                  {/* Crypto Wallet deposit card */}
                   <div className="glass-card p-5 flex flex-col gap-4 border border-white/8 shadow-lg">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-cyan-400 shadow-inner">
-                        <WalletIcon className="w-5 h-5" />
+                    <div className="card-header-with-icon">
+                      <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-cyan-400">
+                        <WalletIcon width="20" height="20" />
                       </div>
                       <div>
                         <h4 className="text-sm font-bold text-white">Crypto Wallet</h4>
@@ -848,8 +818,7 @@ export default function App() {
                       </div>
                     </div>
 
-                    {/* Left details + Right QR grid layout matching screenshot */}
-                    <div className="flex items-center gap-4 mt-2">
+                    <div className="crypto-card-row">
                       <div className="flex-1 flex flex-col gap-2">
                         <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Address</span>
                         <div className="relative">
@@ -863,12 +832,12 @@ export default function App() {
                             onClick={() => handleCopy('https://coinspy.addres...', 'Wallet Address')}
                             className="absolute right-4 top-1/2 -translate-y-1/2 text-cyan-400 hover:text-white p-1"
                           >
-                            <Copy className="w-4 h-4" />
+                            <Copy width="16" height="16" />
                           </button>
                         </div>
                       </div>
 
-                      {/* QR Code Container */}
+                      {/* QR code */}
                       <div className="w-20 h-20 rounded-2xl bg-white p-2 shrink-0 shadow-lg flex items-center justify-center border border-white/10">
                         <svg className="w-full h-full text-slate-900" viewBox="0 0 100 100">
                           <rect x="5" y="5" width="25" height="25" fill="currentColor"/>
@@ -886,26 +855,25 @@ export default function App() {
                       </div>
                     </div>
 
-                    <div className="flex gap-2.5 mt-2">
-                      <button onClick={() => handleAddFunds(50.00)} className="btn-secondary text-[11px] font-bold py-2.5 rounded-xl flex-1 uppercase tracking-wider">
+                    <div className="flex gap-2-5 mt-2">
+                      <button onClick={() => handleAddFunds(50.00)} className="btn-secondary text-[11px] font-bold py-2-5 rounded-xl flex-1 uppercase tracking-wider">
                         Add $50 (Test)
                       </button>
-                      <button onClick={() => handleAddFunds(100.00)} className="btn-secondary text-[11px] font-bold py-2.5 rounded-xl flex-1 uppercase tracking-wider">
+                      <button onClick={() => handleAddFunds(100.00)} className="btn-secondary text-[11px] font-bold py-2-5 rounded-xl flex-1 uppercase tracking-wider">
                         Add $100 (Test)
                       </button>
                     </div>
                   </div>
 
-                  {/* Local Mobile Wallets Card */}
+                  {/* Local Mobile Wallets card */}
                   <div className="glass-card p-5 flex flex-col gap-4 border border-white/8 shadow-lg">
-                    <div className="flex items-center gap-3">
+                    <div className="card-header-with-icon">
                       <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-cyan-400">
-                        <Smartphone className="w-5 h-5" />
+                        <Smartphone width="20" height="20" />
                       </div>
                       <div>
                         <h4 className="text-sm font-bold text-white">Local Mobile Wallets</h4>
-                        {/* Vector Flags rendered crisp side-by-side */}
-                        <div className="flex gap-2 mt-1.5">
+                        <div className="flag-row">
                           <UKFlag />
                           <RomaniaFlag />
                           <NetherlandsFlag />
@@ -921,7 +889,7 @@ export default function App() {
 
                     <button 
                       onClick={() => showToast('Local Mobile Wallet billing loading...', 'info')}
-                      className="btn-secondary text-xs font-bold py-3.5 rounded-xl uppercase tracking-wider"
+                      className="btn-secondary text-xs font-bold py-3-5 rounded-xl uppercase tracking-wider"
                     >
                       Select
                     </button>
@@ -932,106 +900,98 @@ export default function App() {
 
               {/* TAB 3: ORDER HISTORY */}
               {activeTab === 'history' && (
-                <div className="flex flex-col gap-4 animate-fade-in">
+                <div className="flex flex-col gap-4">
                   {orders.map((o) => (
                     <div key={o.id} className="glass-card p-5 mb-0 flex flex-col gap-4 border border-white/5 relative overflow-hidden shadow-md">
                       
-                      {/* Order status badges */}
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center gap-2">
-                          <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold flex items-center gap-1.5 border ${
-                            o.status === 'Completed' 
-                              ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' 
-                              : 'bg-yellow-500/10 border-yellow-500/20 text-yellow-500'
-                          }`}>
-                            <span className={`w-1.5 h-1.5 rounded-full ${
-                              o.status === 'Completed' ? 'bg-emerald-400' : 'bg-yellow-500 animate-pulse'
-                            }`}></span>
-                            {o.status}
-                          </span>
-                        </div>
-                        <div className="text-[11px] text-slate-400 font-semibold font-mono">Order #{o.id}</div>
+                      <div className="badge-container">
+                        <span className={`badge-status ${
+                          o.status === 'Completed' ? 'badge-completed' : 'badge-pending'
+                        }`}>
+                          <span className={`w-1.5 h-1.5 rounded-full ${
+                            o.status === 'Completed' ? 'bg-emerald-400' : 'bg-yellow-500 animate-pulse'
+                          }`}></span>
+                          {o.status}
+                        </span>
+                        <span className="text-[11px] text-slate-400 font-semibold font-mono">Order #{o.id}</span>
                       </div>
 
-                      {/* Header details layout */}
-                      <div className="flex items-center justify-between mt-1">
-                        <div className="flex items-center gap-3">
+                      <div className="order-item-header">
+                        <div className="order-logo-and-title">
                           <div className="shrink-0 bg-white/5 border border-white/10 p-2.5 rounded-2xl">
                             {o.vpnId === 'surfshark' && <SurfsharkLogo />}
                             {o.vpnId === 'nordvpn' && <NordVPNLogo />}
                             {o.vpnId === 'customproxy' && <CustomProxyLogo />}
                             {o.vpnId === 'vpn' && <VpnLogo />}
                           </div>
-                          <div className="flex flex-col justify-center">
+                          <div className="flex-col">
                             <h4 className="text-sm font-extrabold text-white leading-tight">{o.name}</h4>
                             {o.status === 'Pending Delivery' && (
-                              <span className="text-[10px] text-slate-400 mt-1 font-semibold">
+                              <span className="text-[10px] text-slate-400 font-semibold mt-1 block">
                                 Est. Time: {o.estTime} (Auto-completing...)
                               </span>
                             )}
                           </div>
                         </div>
 
-                        {/* Spinner for Pending orders */}
                         {o.status === 'Pending Delivery' && (
                           <div className="loader-dotted shrink-0 mr-1"></div>
                         )}
                       </div>
 
-                      {/* Expandable Credentials Accordion */}
+                      {/* Expandable credentials drawer */}
                       {o.status === 'Completed' && o.credentials && (
                         <div className="border-t border-white/5 pt-3.5 mt-1 flex flex-col gap-3">
                           <button 
                             onClick={() => toggleExpandCredential(o.id)}
-                            className="flex justify-between items-center text-xs font-bold text-white/95 w-full hover:text-cyan-400 transition-colors"
+                            className="flex justify-between items-center text-xs font-bold text-white/95 w-full hover:text-cyan-400 transition-colors border-0 bg-transparent cursor-pointer"
                           >
                             <span>CREDENTIALS</span>
-                            {expandedCredentials[o.id] ? <ChevronUp className="w-4 h-4 text-cyan-400" /> : <ChevronDown className="w-4 h-4 text-cyan-400" />}
+                            {expandedCredentials[o.id] ? <ChevronUp width="16" height="16" /> : <ChevronDown width="16" height="16" />}
                           </button>
 
                           {expandedCredentials[o.id] && (
-                            <div className="flex flex-col gap-3 bg-black/10 border border-white/5 p-4 rounded-2xl animate-slide-down">
-                              
+                            <div className="credentials-box">
                               {/* Username */}
-                              <div className="flex justify-between items-center text-xs">
+                              <div className="credentials-row">
                                 <div className="text-slate-400 font-semibold">Username</div>
-                                <div className="flex items-center gap-2">
-                                  <span className="font-mono text-white text-[11.5px] font-medium">{o.credentials.username}</span>
+                                <div className="credentials-value-container">
+                                  <span className="credentials-value">{o.credentials.username}</span>
                                   <button 
                                     onClick={() => handleCopy(o.credentials.username, 'Username')}
-                                    className="p-1.5 text-slate-400 hover:text-white rounded bg-white/5 border border-white/5"
+                                    className="credentials-copy-btn"
                                   >
-                                    <Copy className="w-3.5 h-3.5" />
+                                    <Copy width="14" height="14" />
                                   </button>
                                 </div>
                               </div>
 
                               {/* Password */}
-                              <div className="flex justify-between items-center text-xs">
+                              <div className="credentials-row">
                                 <div className="text-slate-400 font-semibold">Password</div>
-                                <div className="flex items-center gap-2">
-                                  <span className="font-mono text-white text-[11.5px] font-medium">
+                                <div className="credentials-value-container">
+                                  <span className="credentials-value">
                                     {visibleCredentialsPasswords[o.id] ? o.credentials.password : '••••••••'}
                                   </span>
                                   <button 
                                     onClick={() => toggleCredentialPassword(o.id)}
-                                    className="p-1.5 text-slate-400 hover:text-white rounded bg-white/5 border border-white/5"
+                                    className="credentials-copy-btn"
                                   >
-                                    {visibleCredentialsPasswords[o.id] ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
+                                    {visibleCredentialsPasswords[o.id] ? <EyeOff width="14" height="14" /> : <Eye width="14" height="14" />}
                                   </button>
                                   <button 
                                     onClick={() => handleCopy(o.credentials.password, 'Password')}
-                                    className="p-1.5 text-slate-400 hover:text-white rounded bg-white/5 border border-white/5"
+                                    className="credentials-copy-btn"
                                   >
-                                    <Copy className="w-3.5 h-3.5" />
+                                    <Copy width="14" height="14" />
                                   </button>
                                 </div>
                               </div>
 
                               {/* Expiry */}
-                              <div className="flex justify-between items-center text-xs border-t border-white/5 pt-2 mt-1">
+                              <div className="credentials-row border-t border-white/5 pt-2 mt-1">
                                 <div className="text-slate-400 font-semibold">Expiry</div>
-                                <span className="font-mono text-slate-300 text-[11px] font-medium">{o.credentials.expiry}</span>
+                                <span className="credentials-value text-slate-300">{o.credentials.expiry}</span>
                               </div>
 
                             </div>
@@ -1051,15 +1011,15 @@ export default function App() {
 
               {/* TAB 4: USER PROFILE */}
               {activeTab === 'profile' && (
-                <div className="flex flex-col gap-6 items-center animate-fade-in">
+                <div className="flex flex-col gap-6 items-center">
                   
-                  {/* Profile Info Header */}
-                  <div className="flex flex-col items-center mt-4 text-center w-full">
-                    <div className="relative w-24 h-24 rounded-full p-1 border border-white/20 shadow-[0_0_25px_rgba(255,255,255,0.05)] mb-4 bg-white/5">
+                  {/* Profile Header */}
+                  <div className="profile-header">
+                    <div className="profile-avatar-wrapper">
                       <img 
                         src={profilePic} 
                         alt="Profile avatar" 
-                        className="w-full h-full rounded-full object-cover border border-white/10" 
+                        className="profile-avatar" 
                       />
                     </div>
                     
@@ -1084,37 +1044,37 @@ export default function App() {
                     <span className="text-xs text-slate-400 mt-1 font-mono">{loginEmail}</span>
                   </div>
 
-                  {/* Settings Actions List matching screenshot */}
-                  <div className="w-full flex flex-col gap-3.5 mt-2">
+                  {/* Settings Actions List */}
+                  <div className="profile-button-list">
                     <button 
                       onClick={() => setShowProfileEdit(!showProfileEdit)} 
-                      className="btn-secondary justify-start text-xs font-bold py-4 px-6 border border-white/6"
+                      className="profile-btn"
                     >
-                      <Pencil className="w-4.5 h-4.5 text-cyan-400/90 mr-4" />
+                      <Pencil className="btn-icon text-cyan-400" />
                       <span>EDIT PROFILE</span>
                     </button>
 
                     <button 
                       onClick={() => showToast('Change Password is under construction.', 'info')} 
-                      className="btn-secondary justify-start text-xs font-bold py-4 px-6 border border-white/6"
+                      className="profile-btn"
                     >
-                      <Lock className="w-4.5 h-4.5 text-cyan-400/90 mr-4" />
+                      <Lock className="btn-icon text-cyan-400" />
                       <span>CHANGE PASSWORD</span>
                     </button>
 
                     <button 
                       onClick={() => showToast('Privacy settings updated to max protection.', 'success')} 
-                      className="btn-secondary justify-start text-xs font-bold py-4 px-6 border border-white/6"
+                      className="profile-btn"
                     >
-                      <Settings className="w-4.5 h-4.5 text-cyan-400/90 mr-4" />
+                      <Settings className="btn-icon text-cyan-400" />
                       <span>PRIVACY SETTINGS</span>
                     </button>
 
                     <button 
                       onClick={() => setShowLogoutConfirm(true)} 
-                      className="btn-secondary justify-start text-xs font-bold py-4 px-6 border border-rose-500/15 hover:bg-rose-500/5 text-rose-300"
+                      className="profile-btn border-rose-500/15 hover:bg-rose-500/5 text-rose-300"
                     >
-                      <LogOut className="w-4.5 h-4.5 text-rose-400 mr-4" />
+                      <LogOut className="btn-icon text-rose-400" />
                       <span>LOGOUT</span>
                     </button>
                   </div>
@@ -1160,14 +1120,13 @@ export default function App() {
           </div>
         )}
 
-        {/* 5. LOGOUT CONFIRMATION MODAL OVERLAY */}
+        {/* LOGOUT CONFIRMATION MODAL OVERLAY */}
         {showLogoutConfirm && (
           <div className="absolute inset-0 bg-black/65 backdrop-blur-md flex items-center justify-center p-6 z-[1000] animate-fade-in">
             <div className="glass-card w-full max-w-[310px] p-6 text-center flex flex-col items-center gap-4 shadow-2xl border-white/20 animate-scale-up">
               
-              {/* Power Icon */}
               <div className="w-16 h-16 rounded-full bg-rose-500/10 border border-rose-500/25 flex items-center justify-center text-rose-500 shadow-[0_0_20px_rgba(244,63,94,0.15)]">
-                <Power className="w-7 h-7" />
+                <Power width="28" height="28" />
               </div>
 
               <div className="mt-2">
