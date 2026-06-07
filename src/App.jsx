@@ -1188,37 +1188,43 @@ export default function App() {
               {/* Custom Dropdown */}
               <div className="relative mb-5" style={{ zIndex: 10 }}>
                 <div 
-                  className="flex justify-between items-center px-3 py-2 rounded-t-xl cursor-pointer"
-                  style={{ backgroundColor: 'rgba(255, 255, 255, 0.08)', border: '1px solid rgba(255, 255, 255, 0.1)', borderBottom: 'none' }}
+                  className={`flex justify-between items-center px-3 py-2.5 cursor-pointer ${showDurationDropdown ? 'rounded-t-xl' : 'rounded-xl'}`}
+                  style={{ backgroundColor: 'rgba(255, 255, 255, 0.08)', border: '1px solid rgba(255, 255, 255, 0.1)', borderBottom: showDurationDropdown ? '1px solid transparent' : '1px solid rgba(255, 255, 255, 0.1)' }}
                   onClick={() => setShowDurationDropdown(!showDurationDropdown)}
                 >
-                  <span className="text-white text-xs font-medium">Subscription Duration</span>
-                  <ChevronDown width="14" height="14" className="text-slate-400" />
+                  <span className="text-white font-medium" style={{ fontSize: '11px' }}>
+                    {selectedDuration === 1 && `1 Month $${selectedOrderVpn.price.toFixed(2)}`}
+                    {selectedDuration === 3 && `3 Months $${(selectedOrderVpn.price * 3 * 0.9).toFixed(2)}`}
+                    {selectedDuration === 6 && `6 Months $${(selectedOrderVpn.price * 6 * 0.8).toFixed(2)}`}
+                  </span>
+                  <ChevronDown width="14" height="14" className={`text-slate-400 transition-transform ${showDurationDropdown ? 'rotate-180' : ''}`} />
                 </div>
                 
-                <div className="flex flex-col p-1 rounded-b-xl" style={{ backgroundColor: 'rgba(255, 255, 255, 0.08)', border: '1px solid rgba(255, 255, 255, 0.1)', borderTop: 'none' }}>
-                  <button 
-                    onClick={() => { setSelectedDuration(1); setShowDurationDropdown(false); }}
-                    className="text-left px-3 py-1.5 rounded-lg text-xs font-medium text-white hover:bg-white/10 transition-colors"
-                    style={{ backgroundColor: selectedDuration === 1 ? 'rgba(255,255,255,0.1)' : 'transparent' }}
-                  >
-                    1 Month ${selectedOrderVpn.price.toFixed(2)}
-                  </button>
-                  <button 
-                    onClick={() => { setSelectedDuration(3); setShowDurationDropdown(false); }}
-                    className="text-left px-3 py-1.5 rounded-lg text-xs font-medium text-white hover:bg-white/10 transition-colors"
-                    style={{ backgroundColor: selectedDuration === 3 ? 'rgba(255,255,255,0.1)' : 'transparent' }}
-                  >
-                    3 Months ${(selectedOrderVpn.price * 3 * 0.9).toFixed(2)}
-                  </button>
-                  <button 
-                    onClick={() => { setSelectedDuration(6); setShowDurationDropdown(false); }}
-                    className="text-left px-3 py-1.5 rounded-lg text-xs font-medium text-white hover:bg-white/10 transition-colors"
-                    style={{ backgroundColor: selectedDuration === 6 ? 'rgba(255,255,255,0.1)' : 'transparent' }}
-                  >
-                    6 Months ${(selectedOrderVpn.price * 6 * 0.8).toFixed(2)} - Save 20%
-                  </button>
-                </div>
+                {showDurationDropdown && (
+                  <div className="absolute w-full flex flex-col p-1.5 rounded-b-xl shadow-2xl" style={{ top: '100%', left: 0, backgroundColor: 'rgba(31, 55, 78, 0.98)', border: '1px solid rgba(255, 255, 255, 0.1)', borderTop: 'none', backdropFilter: 'blur(10px)' }}>
+                    <button 
+                      onClick={() => { setSelectedDuration(1); setShowDurationDropdown(false); }}
+                      className="text-left px-3 py-2.5 rounded-lg font-medium text-white hover:bg-white/10 transition-colors"
+                      style={{ fontSize: '11px', backgroundColor: selectedDuration === 1 ? 'rgba(255,255,255,0.1)' : 'transparent', border: 'none' }}
+                    >
+                      1 Month ${selectedOrderVpn.price.toFixed(2)}
+                    </button>
+                    <button 
+                      onClick={() => { setSelectedDuration(3); setShowDurationDropdown(false); }}
+                      className="text-left px-3 py-2.5 rounded-lg font-medium text-white hover:bg-white/10 transition-colors"
+                      style={{ fontSize: '11px', backgroundColor: selectedDuration === 3 ? 'rgba(255,255,255,0.1)' : 'transparent', border: 'none' }}
+                    >
+                      3 Months ${(selectedOrderVpn.price * 3 * 0.9).toFixed(2)}
+                    </button>
+                    <button 
+                      onClick={() => { setSelectedDuration(6); setShowDurationDropdown(false); }}
+                      className="text-left px-3 py-2.5 rounded-lg font-medium text-white hover:bg-white/10 transition-colors"
+                      style={{ fontSize: '11px', backgroundColor: selectedDuration === 6 ? 'rgba(255,255,255,0.1)' : 'transparent', border: 'none' }}
+                    >
+                      6 Months ${(selectedOrderVpn.price * 6 * 0.8).toFixed(2)} - Save 20%
+                    </button>
+                  </div>
+                )}
               </div>
 
               {/* Summary */}
@@ -1257,7 +1263,8 @@ export default function App() {
                 
                 <button 
                   onClick={() => setSelectedOrderVpn(null)} 
-                  className="text-slate-300 text-xs font-medium hover:text-white transition-colors text-center bg-transparent border-0"
+                  className="text-slate-300 text-xs font-medium hover:text-white transition-colors text-center"
+                  style={{ background: 'transparent', border: 'none', padding: '4px' }}
                 >
                   Back to Marketplace
                 </button>
