@@ -803,30 +803,31 @@ export default function App() {
                 <div className="flex flex-col gap-4">
                   
                   {/* Crypto Wallet deposit card */}
-                  <div className="glass-card p-5 flex flex-col gap-4 border border-white/8 shadow-lg">
+                  <div className="glass-card p-5 flex flex-col gap-4">
                     <div className="card-header-with-icon">
-                      <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-cyan-400">
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center text-cyan-400" style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
                         <WalletIcon width="20" height="20" />
                       </div>
                       <div>
                         <h4 className="text-sm font-bold text-white">Crypto Wallet</h4>
                         <div className="flex gap-2 mt-1">
-                          <span className="text-[9px] font-bold text-emerald-400 border border-emerald-500/20 px-1.5 py-0.5 rounded bg-emerald-500/5">USDT</span>
-                          <span className="text-[9px] font-bold text-amber-500 border border-amber-500/20 px-1.5 py-0.5 rounded bg-amber-500/5">BTC</span>
-                          <span className="text-[9px] font-bold text-blue-400 border border-blue-500/20 px-1.5 py-0.5 rounded bg-blue-500/5">ETH</span>
+                          <span className="font-bold text-emerald-400" style={{ fontSize: '9px', border: '1px solid rgba(16, 185, 129, 0.2)', padding: '2px 6px', borderRadius: '4px', backgroundColor: 'rgba(16, 185, 129, 0.05)' }}>USDT</span>
+                          <span className="font-bold text-amber-500" style={{ fontSize: '9px', border: '1px solid rgba(245, 158, 11, 0.2)', padding: '2px 6px', borderRadius: '4px', backgroundColor: 'rgba(245, 158, 11, 0.05)' }}>BTC</span>
+                          <span className="font-bold text-blue-400" style={{ fontSize: '9px', border: '1px solid rgba(59, 130, 246, 0.2)', padding: '2px 6px', borderRadius: '4px', backgroundColor: 'rgba(59, 130, 246, 0.05)' }}>ETH</span>
                         </div>
                       </div>
                     </div>
 
                     <div className="crypto-card-row">
                       <div className="flex-1 flex flex-col gap-2">
-                        <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Address</span>
+                        <span className="font-bold text-slate-400 uppercase tracking-wider" style={{ fontSize: '11px' }}>Address</span>
                         <div className="relative">
                           <input 
                             type="text" 
                             readOnly 
                             value="https://coinspy.addres..." 
-                            className="input-field py-3 pl-4 pr-12 text-[11px] font-mono tracking-wider bg-black/10" 
+                            className="input-field py-3 pl-4 pr-12 font-mono tracking-wider" 
+                            style={{ fontSize: '11px', backgroundColor: 'rgba(0,0,0,0.1)' }} 
                           />
                           <button 
                             onClick={() => handleCopy('https://coinspy.addres...', 'Wallet Address')}
@@ -838,7 +839,7 @@ export default function App() {
                       </div>
 
                       {/* QR code */}
-                      <div className="w-20 h-20 rounded-2xl bg-white p-2 shrink-0 shadow-lg flex items-center justify-center border border-white/10">
+                      <div className="w-20 h-20 rounded-2xl bg-white p-2 shrink-0 flex items-center justify-center" style={{ border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 10px 15px rgba(0,0,0,0.1)' }}>
                         <svg className="w-full h-full text-slate-900" viewBox="0 0 100 100">
                           <rect x="5" y="5" width="25" height="25" fill="currentColor"/>
                           <rect x="10" y="10" width="15" height="15" fill="white"/>
@@ -856,19 +857,19 @@ export default function App() {
                     </div>
 
                     <div className="flex gap-2-5 mt-2">
-                      <button onClick={() => handleAddFunds(50.00)} className="btn-secondary text-[11px] font-bold py-2-5 rounded-xl flex-1 uppercase tracking-wider">
+                      <button onClick={() => handleAddFunds(50.00)} className="btn-secondary font-bold py-2-5 rounded-xl flex-1 uppercase tracking-wider" style={{ fontSize: '11px' }}>
                         Add $50 (Test)
                       </button>
-                      <button onClick={() => handleAddFunds(100.00)} className="btn-secondary text-[11px] font-bold py-2-5 rounded-xl flex-1 uppercase tracking-wider">
+                      <button onClick={() => handleAddFunds(100.00)} className="btn-secondary font-bold py-2-5 rounded-xl flex-1 uppercase tracking-wider" style={{ fontSize: '11px' }}>
                         Add $100 (Test)
                       </button>
                     </div>
                   </div>
 
                   {/* Local Mobile Wallets card */}
-                  <div className="glass-card p-5 flex flex-col gap-4 border border-white/8 shadow-lg">
+                  <div className="glass-card p-5 flex flex-col gap-4">
                     <div className="card-header-with-icon">
-                      <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-cyan-400">
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center text-cyan-400" style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
                         <Smartphone width="20" height="20" />
                       </div>
                       <div>
@@ -882,7 +883,7 @@ export default function App() {
                       </div>
                     </div>
 
-                    <div className="text-[12px] leading-relaxed text-slate-400 font-semibold px-0.5">
+                    <div className="text-slate-400 font-semibold px-0.5" style={{ fontSize: '12px', lineHeight: '1.625' }}>
                       Supported in your region: <br />
                       <span className="text-white font-bold">[Country, Names & Local Options]</span>
                     </div>
@@ -902,23 +903,21 @@ export default function App() {
               {activeTab === 'history' && (
                 <div className="flex flex-col gap-4">
                   {orders.map((o) => (
-                    <div key={o.id} className="glass-card p-5 mb-0 flex flex-col gap-4 border border-white/5 relative overflow-hidden shadow-md">
+                    <div key={o.id} className="glass-card p-5 mb-0 flex flex-col gap-4 relative overflow-hidden">
                       
                       <div className="badge-container">
                         <span className={`badge-status ${
                           o.status === 'Completed' ? 'badge-completed' : 'badge-pending'
                         }`}>
-                          <span className={`w-1.5 h-1.5 rounded-full ${
-                            o.status === 'Completed' ? 'bg-emerald-400' : 'bg-yellow-500 animate-pulse'
-                          }`}></span>
+                          <span className={`w-1-5 h-1-5 rounded-full ${o.status !== 'Completed' ? 'animate-pulse' : ''}`} style={{ backgroundColor: o.status === 'Completed' ? '#10b981' : '#eab308' }}></span>
                           {o.status}
                         </span>
-                        <span className="text-[11px] text-slate-400 font-semibold font-mono">Order #{o.id}</span>
+                        <span className="text-slate-400 font-semibold font-mono" style={{ fontSize: '11px' }}>Order #{o.id}</span>
                       </div>
 
                       <div className="order-item-header">
                         <div className="order-logo-and-title">
-                          <div className="shrink-0 bg-white/5 border border-white/10 p-2.5 rounded-2xl">
+                          <div className="shrink-0 rounded-2xl" style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', padding: '10px' }}>
                             {o.vpnId === 'surfshark' && <SurfsharkLogo />}
                             {o.vpnId === 'nordvpn' && <NordVPNLogo />}
                             {o.vpnId === 'customproxy' && <CustomProxyLogo />}
@@ -927,7 +926,7 @@ export default function App() {
                           <div className="flex-col">
                             <h4 className="text-sm font-extrabold text-white leading-tight">{o.name}</h4>
                             {o.status === 'Pending Delivery' && (
-                              <span className="text-[10px] text-slate-400 font-semibold mt-1 block">
+                              <span className="text-slate-400 font-semibold mt-1" style={{ fontSize: '10px', display: 'block' }}>
                                 Est. Time: {o.estTime} (Auto-completing...)
                               </span>
                             )}
@@ -941,7 +940,7 @@ export default function App() {
 
                       {/* Expandable credentials drawer */}
                       {o.status === 'Completed' && o.credentials && (
-                        <div className="border-t border-white/5 pt-3.5 mt-1 flex flex-col gap-3">
+                        <div className="mt-1 flex flex-col gap-3" style={{ borderTop: '1px solid rgba(255, 255, 255, 0.05)', paddingTop: '14px' }}>
                           <button 
                             onClick={() => toggleExpandCredential(o.id)}
                             className="flex justify-between items-center text-xs font-bold text-white/95 w-full hover:text-cyan-400 transition-colors border-0 bg-transparent cursor-pointer"
@@ -989,7 +988,7 @@ export default function App() {
                               </div>
 
                               {/* Expiry */}
-                              <div className="credentials-row border-t border-white/5 pt-2 mt-1">
+                              <div className="credentials-row mt-1" style={{ borderTop: '1px solid rgba(255, 255, 255, 0.05)', paddingTop: '8px' }}>
                                 <div className="text-slate-400 font-semibold">Expiry</div>
                                 <span className="credentials-value text-slate-300">{o.credentials.expiry}</span>
                               </div>
@@ -1024,7 +1023,7 @@ export default function App() {
                     </div>
                     
                     {showProfileEdit ? (
-                      <div className="flex items-center gap-2 w-full max-w-[220px] justify-center">
+                      <div className="flex items-center gap-2 w-full justify-center" style={{ maxWidth: '220px' }}>
                         <input 
                           type="text" 
                           value={tempProfileName}
@@ -1039,7 +1038,7 @@ export default function App() {
                         </button>
                       </div>
                     ) : (
-                      <h3 className="font-title text-[22px] font-bold tracking-wide text-white">{profileName}</h3>
+                      <h3 className="font-title font-bold tracking-wide text-white" style={{ fontSize: '22px' }}>{profileName}</h3>
                     )}
                     <span className="text-xs text-slate-400 mt-1 font-mono">{loginEmail}</span>
                   </div>
@@ -1072,7 +1071,7 @@ export default function App() {
 
                     <button 
                       onClick={() => setShowLogoutConfirm(true)} 
-                      className="profile-btn border-rose-500/15 hover:bg-rose-500/5 text-rose-300"
+                      className="profile-btn profile-btn-logout"
                     >
                       <LogOut className="btn-icon text-rose-400" />
                       <span>LOGOUT</span>
@@ -1122,16 +1121,16 @@ export default function App() {
 
         {/* LOGOUT CONFIRMATION MODAL OVERLAY */}
         {showLogoutConfirm && (
-          <div className="absolute inset-0 bg-black/65 backdrop-blur-md flex items-center justify-center p-6 z-[1000] animate-fade-in">
-            <div className="glass-card w-full max-w-[310px] p-6 text-center flex flex-col items-center gap-4 shadow-2xl border-white/20 animate-scale-up">
+          <div className="modal-overlay">
+            <div className="glass-card modal-card">
               
-              <div className="w-16 h-16 rounded-full bg-rose-500/10 border border-rose-500/25 flex items-center justify-center text-rose-500 shadow-[0_0_20px_rgba(244,63,94,0.15)]">
+              <div className="modal-icon-logout">
                 <Power width="28" height="28" />
               </div>
 
               <div className="mt-2">
-                <h3 className="font-title text-[18px] font-extrabold text-white">Sign Out</h3>
-                <p className="text-[11.5px] leading-relaxed text-slate-400 mt-2 px-2 font-medium">
+                <h3 className="font-title font-extrabold text-white" style={{ fontSize: '18px' }}>Sign Out</h3>
+                <p className="text-slate-400 mt-2 px-2 font-medium" style={{ fontSize: '11.5px', lineHeight: '1.625' }}>
                   Are you sure you want to sign out? <br />Your session will end securely.
                 </p>
               </div>
