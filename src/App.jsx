@@ -73,8 +73,8 @@ const VpnLogo = () => (
 const GlobeShieldLogo = ({ size = 160 }) => (
   <div className="relative flex items-center justify-center animate-slide-in" style={{ width: size, height: size }}>
     {/* Global lines */}
-    <div className="absolute inset-0 rounded-full border border-cyan-500/10">
-      <svg className="w-full h-full opacity-25" viewBox="0 0 100 100">
+    <div className="absolute inset-0 rounded-full border-cyan-dim" style={{ opacity: 0.25 }}>
+      <svg className="w-full h-full" viewBox="0 0 100 100">
         <circle cx="50" cy="50" r="45" fill="none" stroke="#00E5FF" strokeWidth="0.8"/>
         <ellipse cx="50" cy="50" rx="45" ry="16" fill="none" stroke="#00E5FF" strokeWidth="0.6"/>
         <ellipse cx="50" cy="50" rx="16" ry="45" fill="none" stroke="#00E5FF" strokeWidth="0.6"/>
@@ -83,13 +83,13 @@ const GlobeShieldLogo = ({ size = 160 }) => (
       </svg>
     </div>
     {/* Shield */}
-    <div className="absolute w-[80%] h-[80%] rounded-full bg-cyan-950/20 backdrop-blur-xl border border-cyan-500/25 shadow-[0_0_35px_rgba(0,229,255,0.2)] flex flex-col items-center justify-center">
-      <svg viewBox="0 0 100 100" className="w-[52%] h-[52%] drop-shadow-[0_0_10px_rgba(0,229,255,0.5)]" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div className="absolute shield-container flex flex-col items-center justify-center">
+      <svg viewBox="0 0 100 100" style={{ width: '52%', height: '52%', filter: 'drop-shadow(0 0 10px rgba(0,229,255,0.5))' }} fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M50 12L15 25V55C15 75 30 90 50 94C70 90 85 75 85 55V25L50 12Z" fill="rgba(0, 229, 255, 0.1)" stroke="#00E5FF" strokeWidth="4.5" />
         <path d="M50 30V76" stroke="#00E5FF" strokeWidth="3.5" strokeDasharray="5 3.5" />
         <path d="M35 50H65" stroke="#00E5FF" strokeWidth="3.5" strokeDasharray="5 3.5" />
       </svg>
-      <span className="font-title text-white font-extrabold text-[15px] tracking-[0.25em] mt-3 drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]">VPN</span>
+      <span className="font-title text-white font-extrabold" style={{ fontSize: '15px', letterSpacing: '0.25em', marginTop: '12px', filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.3))' }}>VPN</span>
     </div>
   </div>
 );
@@ -440,10 +440,10 @@ export default function App() {
 
         {/* ONBOARDING VIEW */}
         {screen === 'onboarding' && (
-          <div className="screen-wrapper justify-between h-full py-6 px-5">
+          <div className="screen-wrapper justify-between py-6 px-5">
             <div className="flex justify-between items-center mt-2">
               <button className="nav-btn hidden"><ArrowLeft className="w-5 h-5" /></button>
-              <div className="font-title text-[11px] font-bold uppercase tracking-[0.2em] text-cyan-400/90">ONBOARDING</div>
+              <div className="font-title font-bold uppercase" style={{ fontSize: '11px', letterSpacing: '0.2em', color: 'rgba(34, 211, 238, 0.9)' }}>ONBOARDING</div>
               <button className="nav-btn"><span className="text-xs font-bold">•••</span></button>
             </div>
 
@@ -451,10 +451,10 @@ export default function App() {
               <GlobeShieldLogo size={175} />
               
               <div className="text-center px-4">
-                <h1 className="font-title text-[28px] font-extrabold tracking-tight text-white mb-3">
+                <h1 className="font-title font-extrabold tracking-tight text-white mb-3" style={{ fontSize: '28px' }}>
                   SECURE YOUR <br />JOURNEY
                 </h1>
-                <p className="text-[12px] leading-relaxed text-slate-400 font-semibold max-w-[270px] mx-auto">
+                <p className="text-slate-400 font-semibold mx-auto" style={{ fontSize: '12px', lineHeight: '1.625', maxWidth: '270px' }}>
                   Premium VPN marketplace, manually analyzed and delivered directly to your profile.
                 </p>
               </div>
@@ -470,20 +470,20 @@ export default function App() {
 
         {/* SIGN IN VIEW */}
         {screen === 'signin' && (
-          <div className="screen-wrapper h-full py-6 px-5 flex flex-col justify-between">
+          <div className="screen-wrapper py-6 px-5 flex flex-col justify-between">
             <div>
               <div className="flex justify-between items-center mt-2 mb-8">
                 <button onClick={() => navigateTo('onboarding')} className="nav-btn">
                   <ArrowLeft className="w-5 h-5" />
                 </button>
-                <div className="font-title text-[11px] font-bold uppercase tracking-[0.2em] text-cyan-400/90">SIGN IN</div>
+                <div className="font-title font-bold uppercase" style={{ fontSize: '11px', letterSpacing: '0.2em', color: 'rgba(34, 211, 238, 0.9)' }}>SIGN IN</div>
                 <button className="nav-btn"><span className="text-xs font-bold">•••</span></button>
               </div>
 
               <div className="flex flex-col items-center mb-8">
                 <GlobeShieldLogo size={90} />
                 <h2 className="font-title text-2xl font-bold mt-4 text-white">Welcome Back</h2>
-                <p className="text-xs text-slate-400 mt-1-5 text-center px-6 leading-relaxed font-medium">
+                <p className="text-xs text-slate-400 mt-1-5 text-center px-6 font-medium" style={{ lineHeight: '1.625' }}>
                   Sign in to access your secure marketplace & wallet.
                 </p>
               </div>
@@ -529,7 +529,7 @@ export default function App() {
                   </button>
                 </div>
 
-                <div className="flex justify-between items-center text-[12px] px-1 mt-1">
+                <div className="flex justify-between items-center px-1 mt-1" style={{ fontSize: '12px' }}>
                   <label className="checkbox-container">
                     <input 
                       type="checkbox" 
@@ -538,7 +538,7 @@ export default function App() {
                       className="hidden" 
                     />
                     <div className="checkbox-custom">
-                      {agreeTerms && <Check className="w-3.5 h-3.5 text-white" />}
+                      {agreeTerms && <Check style={{ width: '14px', height: '14px' }} className="text-white" />}
                     </div>
                     <span className="font-medium text-slate-400">[Terms & Privacy Policy]</span>
                   </label>
@@ -560,20 +560,20 @@ export default function App() {
 
         {/* SIGN UP VIEW */}
         {screen === 'signup' && (
-          <div className="screen-wrapper h-full py-6 px-5 flex flex-col justify-between">
+          <div className="screen-wrapper py-6 px-5 flex flex-col justify-between">
             <div>
               <div className="flex justify-between items-center mt-2 mb-8">
                 <button onClick={() => navigateTo('signin')} className="nav-btn">
                   <ArrowLeft className="w-5 h-5" />
                 </button>
-                <div className="font-title text-[11px] font-bold uppercase tracking-[0.2em] text-cyan-400/90">SIGN UP</div>
+                <div className="font-title font-bold uppercase" style={{ fontSize: '11px', letterSpacing: '0.2em', color: 'rgba(34, 211, 238, 0.9)' }}>SIGN UP</div>
                 <button className="nav-btn"><span className="text-xs font-bold">•••</span></button>
               </div>
 
               <div className="flex flex-col items-center mb-8">
                 <GlobeShieldLogo size={90} />
                 <h2 className="font-title text-2xl font-bold mt-4 text-white">Create Your Account</h2>
-                <p className="text-xs text-slate-400 mt-1-5 text-center px-6 leading-relaxed font-medium">
+                <p className="text-xs text-slate-400 mt-1-5 text-center px-6 font-medium" style={{ lineHeight: '1.625' }}>
                   Join the premium VPN marketplace.
                 </p>
               </div>
@@ -634,7 +634,7 @@ export default function App() {
 
         {/* MAIN APP VIEWS */}
         {screen === 'app' && (
-          <div className="screen-wrapper h-full flex flex-col justify-between">
+          <div className="screen-wrapper flex flex-col justify-between">
             {/* Nav Header */}
             <div className="nav-header">
               {activeTab === 'addfunds' ? (
