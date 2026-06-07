@@ -1,19 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --bg-gradient: radial-gradient(circle at 30% 20%, #0d2735 0%, #060e15 100%);
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-bg-hover: rgba(255, 255, 255, 0.1);
+  --bg-gradient: radial-gradient(circle at 50% 35%, #183e50 0%, #071018 60%, #03070b 100%);
+  --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.03) 100%);
+  --glass-bg-hover: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.06) 100%);
   --glass-border: 1px solid rgba(255, 255, 255, 0.12);
-  --glass-border-focus: 1px solid rgba(255, 255, 255, 0.3);
-  --purple-gradient: linear-gradient(135deg, #9C27B0 0%, #E91E63 100%);
-  --purple-gradient-hover: linear-gradient(135deg, #b035c4 0%, #ff3b7d 100%);
-  --red-gradient: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
-  --shadow-color: rgba(0, 0, 0, 0.4);
+  --glass-border-focus: 1px solid rgba(255, 255, 255, 0.28);
+  --purple-gradient: linear-gradient(90deg, #8b5cf6 0%, #ec4899 100%);
+  --purple-gradient-hover: linear-gradient(90deg, #9b6cf8 0%, #f43f5e 100%);
+  --red-gradient: linear-gradient(90deg, #f43f5e 0%, #e11d48 100%);
+  --shadow-color: rgba(0, 0, 0, 0.45);
   --font-title: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
   --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.65);
+  --text-secondary: rgba(255, 255, 255, 0.7);
   --text-muted: rgba(255, 255, 255, 0.45);
 }
 
@@ -26,7 +26,7 @@
 
 body {
   font-family: var(--font-body);
-  background-color: #03080c;
+  background-color: #03070b;
   color: var(--text-primary);
   min-height: 100vh;
   display: flex;
@@ -42,10 +42,10 @@ body {
   height: 844px;
   border-radius: 48px;
   padding: 12px;
-  background: #181c20;
+  background: #15181b;
   box-shadow: 
-    0px 25px 50px -12px rgba(0, 0, 0, 0.8),
-    inset 0 0 4px 2px rgba(255, 255, 255, 0.1),
+    0px 25px 60px -12px rgba(0, 0, 0, 0.85),
+    inset 0 0 5px 2px rgba(255, 255, 255, 0.1),
     inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   display: flex;
   justify-content: center;
@@ -96,7 +96,7 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
+  box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.75);
 }
 
 /* Status Bar */
@@ -109,7 +109,6 @@ body {
   font-size: 13px;
   font-weight: 500;
   color: var(--text-primary);
-  font-family: var(--font-body);
   z-index: 999;
   user-select: none;
 }
@@ -143,7 +142,7 @@ body {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: var(--glass-bg);
+  background: rgba(255, 255, 255, 0.05);
   border: var(--glass-border);
   display: flex;
   align-items: center;
@@ -155,7 +154,7 @@ body {
 }
 
 .nav-btn:hover {
-  background: var(--glass-bg-hover);
+  background: rgba(255, 255, 255, 0.1);
   transform: scale(1.05);
 }
 
@@ -186,14 +185,14 @@ body {
 /* Glass Card */
 .glass-card {
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
   border: var(--glass-border);
-  border-radius: 24px;
+  border-radius: 28px;
   padding: 24px;
-  box-shadow: 0 8px 32px 0 var(--shadow-color);
+  box-shadow: 0 10px 32px 0 var(--shadow-color);
   margin-bottom: 20px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
 }
 
 /* Glass Inputs */
@@ -205,7 +204,7 @@ body {
 
 .input-icon {
   position: absolute;
-  left: 16px;
+  left: 18px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-muted);
@@ -217,9 +216,9 @@ body {
 
 .input-field {
   width: 100%;
-  padding: 14px 16px 14px 48px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.04);
+  padding: 15px 16px 15px 50px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
   font-family: var(--font-body);
   font-size: 14px;
@@ -229,9 +228,9 @@ body {
 }
 
 .input-field:focus {
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
 }
 
 .input-field:focus + .input-icon {
@@ -240,7 +239,7 @@ body {
 
 .input-right-btn {
   position: absolute;
-  right: 16px;
+  right: 18px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-muted);
@@ -260,29 +259,29 @@ body {
 /* Primary Button */
 .btn-primary {
   width: 100%;
-  padding: 14px;
-  border-radius: 16px;
+  padding: 15px;
+  border-radius: 18px;
   background: var(--purple-gradient);
   border: none;
   font-family: var(--font-title);
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   color: #ffffff;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);
+  box-shadow: 0 5px 18px rgba(139, 92, 246, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
+  letter-spacing: 1px;
 }
 
 .btn-primary:hover {
   background: var(--purple-gradient-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(156, 39, 176, 0.5);
+  box-shadow: 0 7px 22px rgba(139, 92, 246, 0.45);
 }
 
 .btn-primary:active {
@@ -292,24 +291,24 @@ body {
 /* Secondary Glass Button */
 .btn-secondary {
   width: 100%;
-  padding: 14px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.06);
+  padding: 15px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
   border: var(--glass-border);
   font-family: var(--font-title);
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 600;
   color: #ffffff;
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.25);
 }
 
@@ -320,8 +319,9 @@ body {
 /* Bottom Tab Navigation Bar */
 .bottom-nav {
   height: 84px;
-  background: rgba(8, 16, 23, 0.7);
+  background: rgba(7, 16, 24, 0.75);
   backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
   border-top: var(--glass-border);
   display: flex;
   justify-content: space-around;
@@ -348,7 +348,7 @@ body {
 .nav-tab-icon {
   width: 22px;
   height: 22px;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .nav-tab-label {
@@ -363,6 +363,7 @@ body {
 
 .nav-tab.active .nav-tab-icon {
   transform: translateY(-2px);
+  color: #ffffff;
 }
 
 /* Home Indicator for iPhone frame style */
@@ -373,7 +374,7 @@ body {
   transform: translateX(-50%);
   width: 140px;
   height: 5px;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.25);
   border-radius: 10px;
   z-index: 1000;
   pointer-events: none;
@@ -393,8 +394,8 @@ body {
 .checkbox-custom {
   width: 18px;
   height: 18px;
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -412,13 +413,13 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  animation: slideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -426,26 +427,44 @@ body {
   }
 }
 
-/* Pulse Animation for active order indicator */
-@keyframes pulse {
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.4);
+/* Spinner Animation matching dotted design */
+.loader-dotted {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-top-color: #eab308;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
-  70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 6px rgba(234, 179, 8, 0);
-  }
-  100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(234, 179, 8, 0);
-  }
+}
+
+/* Custom styling for the bottom status in Marketplace */
+.marketplace-footer-text {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 6px;
+  margin-top: 12px;
+}
+
+.marketplace-footer-text .highlight {
+  color: var(--text-secondary);
 }
 
 /* Responsive adjust for full screen on mobile */
 @media (max-width: 450px) {
   body {
-    background-color: #060e15;
+    background-color: #050c12;
   }
   .device-wrapper {
     width: 100vw;
